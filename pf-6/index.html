@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(180deg, #1a1a40, #4b0082, #ff007f);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* ===== Animated Multi-Colored Bubble Background ===== */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  background: radial-gradient(circle at 30% 30%, #1a1a40, #000);
+}
+
+.bubble {
+  position: absolute;
+  bottom: -150px;
+  border-radius: 50%;
+  animation: rise 18s infinite ease-in;
+  mix-blend-mode: screen;
+  opacity: 0.7;
+  filter: blur(3px);
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.3);
+    opacity: 0;
+  }
+}
+
+
+.bubbles::before,
+.bubbles::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(white 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.2;
+  animation: float 10s infinite linear;
+}
+
+@keyframes float {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Navbar */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  padding: 15px 0;
+  text-align: center;
+  z-index: 1000;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #ffd700;
+}
+
+/* Cartoon Face */
+.cartoon-face {
+  margin-top: 100px;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background: #ffd700;
+  border-radius: 50%;
+  border: 4px solid white;
+  margin-left: auto;
+  margin-right: auto;
+  animation: face-bounce 4s infinite ease-in-out;
+}
+
+.eye {
+  position: absolute;
+  top: 35px;
+  width: 15px;
+  height: 15px;
+  background: black;
+  border-radius: 50%;
+}
+
+.eye.left { left: 30px; }
+.eye.right { right: 30px; }
+
+.mouth {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  width: 40px;
+  height: 6px;
+  background: black;
+  border-radius: 10px;
+  transform: translateX(-50%);
+}
+
+@keyframes face-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Sections */
+/* ===== Skill Modal ===== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.close {
+  float: right;
+  font-size: 25px;
+  cursor: pointer;
+  color: #333;
+}
+
+.certificate-img {
+  width: 90%;
+  max-width: 500px;
+  margin: 10px 0;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.section {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.section.dark {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.profile-pic {
+  width: 150px;
+  border-radius: 50%;
+  border: 4px solid white;
+  margin-bottom: 20px;
+}
+
+.buttons button,
+.contact-buttons button,
+.project-card button,
+.modal-content button {
+  background: #6a0dad;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 5px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ff007f;
+}
+
+/* Project Grid */
+.project-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 15px;
+  width: 280px;
+  text-align: center;
+  backdrop-filter: blur(5px);
+}
+
+.project-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  color: black;
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 500px;
+  text-align: center;
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.bubble {
+  filter: blur(2px);
+  opacity: 0.9;
+}
+/* ====== SKILLS SECTION ====== */
+.skills-section {
+  position: relative;
+  z-index: 1;
+  padding: 100px 0;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  color: #fff;
+}
+
+.skills-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  color: #00e0ff;
+  text-shadow: 0 0 15px rgba(0, 224, 255, 0.8);
+}
+
+/* Skill Buttons */
+.skills-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.skill-btn {
+  background: linear-gradient(135deg, #00e0ff, #7b2ff7);
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 224, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.skill-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(123, 47, 247, 0.8);
+}
+
+/* ====== SKILL MODAL ====== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.8);
+  animation: fadeIn 0.4s ease;
+}
+
+.modal-content {
+  background: #121212;
+  color: #fff;
+  margin: 6% auto;
+  padding: 25px 20px;
+  border-radius: 15px;
+  width: 50%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0, 224, 255, 0.3);
+  animation: slideUp 0.4s ease;
+}
+
+.close {
+  float: right;
+  font-size: 26px;
+  cursor: pointer;
+  color: #00e0ff;
+  transition: color 0.2s ease;
+}
+
+.close:hover {
+  color: #ff0077;
+}
+
+#skillTitle {
+  font-size: 1.8rem;
+  margin-top: 15px;
+  color: #00e0ff;
+  text-shadow: 0 0 10px rgba(0, 224, 255, 0.8);
+}
+
+/* Certificate Images in Modal */
+#skillCertificates {
+  margin-top: 20px;
+}
+
+.certificate-img {
+  width: 30%;
+  max-width: 200px;
+  margin: 15px 0;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0, 224, 255, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.certificate-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 35px rgba(123, 47, 247, 0.6);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .skills-section h2 {
+    font-size: 2rem;
+  }
+
+  .skill-btn {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 15px;
+  }
+}
+/* ====== PROJECTS SECTION ====== */
+.projects-section {
+  position: relative;
+  z-index: 1;
+  padding: 100px 0;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  color: #fff;
+}
+
+.projects-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  color: #7b2ff7;
+  text-shadow: 0 0 15px rgba(123, 47, 247, 0.8);
+}
+
+/* Project Buttons */
+.project-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.project-btn {
+  background: linear-gradient(135deg, #7b2ff7, #00e0ff);
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(123, 47, 247, 0.5);
+  transition: all 0.3s ease;
+}
+
+.project-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 224, 255, 0.8);
+}
+
+/* ====== PROJECT MODAL ====== */
+#projectModal .modal-content {
+  background: #121212;
+  color: #fff;
+  margin: 6% auto;
+  padding: 25px 20px;
+  border-radius: 15px;
+  width: 85%;
+  max-width: 800px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(123, 47, 247, 0.4);
+}
+
+#projectModal h3 {
+  font-size: 1.8rem;
+  color: #7b2ff7;
+  margin-top: 10px;
+  text-shadow: 0 0 10px rgba(123, 47, 247, 0.8);
+}
+
+#projectDetails p {
+  margin: 15px 0;
+  color: #ccc;
+  font-size: 1.1rem;
+}
+
+.project-img {
+  width: 90%;
+  max-width: 550px;
+  margin: 15px 0;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(123, 47, 247, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 35px rgba(0, 224, 255, 0.6);
+}
+
+/* LinkedIn Button */
+.linkedin-btn {
+  display: inline-block;
+  margin-top: 15px;
+  background: linear-gradient(135deg, #0077b5, #00e0ff);
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(0, 119, 181, 0.6);
+  transition: all 0.3s ease;
+}
+
+.linkedin-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 224, 255, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .projects-section h2 {
+    font-size: 2rem;
+  }
+
+  .project-btn {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+
+  #projectModal .modal-content {
+    width: 90%;
+    padding: 15px;
+  }
+}
+/* ====== CONTACT SECTION (Same Style as Project Section) ====== */
+.contact-section {
+  position: relative;
+  z-index: 1;
+  padding: 100px 0;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+  color: #00e0ff;
+  text-shadow: 0 0 15px rgba(0, 224, 255, 0.8);
+}
+
+.contact-section p {
+  font-size: 1.1rem;
+  margin-bottom: 35px;
+  color: #ccc;
+}
+
+/* Contact Buttons */
+.contact-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.contact-btn {
+  background: linear-gradient(135deg, #00e0ff, #7b2ff7);
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 224, 255, 0.5);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(123, 47, 247, 0.8);
+}
+
+/* Optional glowing border like project cards */
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(0, 224, 255, 0.05), transparent 70%);
+  z-index: -1;
+}
+
+/* Smooth Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.contact-section {
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact-section h2 {
+    font-size: 2rem;
+  }
+
+  .contact-btn {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ====== ABOUT SECTION (Styled like Skills/Projects/Contact) ====== */
+.about-section {
+  position: relative;
+  z-index: 1;
+  padding: 100px 0;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+.about-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #00e0ff;
+  text-shadow: 0 0 15px rgba(0, 224, 255, 0.8);
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Profile Image */
+.profile-img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 30px rgba(0, 224, 255, 0.6);
+  border: 3px solid rgba(0, 224, 255, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(123, 47, 247, 0.8);
+}
+
+/* About Text */
+.about-text {
+  max-width: 550px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 25px 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 224, 255, 0.3);
+  line-height: 1.8;
+  color: #ddd;
+  font-size: 1.05rem;
+  text-align: left;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-text:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 35px rgba(123, 47, 247, 0.6);
+}
+
+/* Optional glowing gradient background */
+.about-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(0, 224, 255, 0.05), transparent 70%);
+  z-index: -1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .about-text {
+    font-size: 0.95rem;
+    padding: 20px;
+  }
+}
+
+
+
+/* Profile Name Styling */
+.profile-name {
+  margin-top: 15px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00e0ff;
+  text-shadow: 0 0 15px rgba(0, 224, 255, 0.8);
+  letter-spacing: 1px;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.profile-name:hover {
+  transform: scale(1.05);
+  text-shadow: 0 0 25px rgba(123, 47, 247, 0.9);
+}
+
+/* Optional container centering */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+  </style>
+</head>
+<body>
+<div class="background" id="background"></div>
+  <!-- Navbar -->
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  
+
+ <section id="about" class="about-section">
+  <h2>About Me</h2>
+
+  <div class="about-container">
+    <div class="profile-container">
+      <img src="WhatsApp Image 2024-12-26 at 19.42.53_3a34a04e.jpg" alt="Profile Picture" class="profile-img" />
+      <h3 class="profile-name">Raviteja Mettupelli</h3>
+    </div>
+
+    <div class="about-text">
+      <p>
+        Hi, I'm <strong>Raviteja Mettupelli</strong>! I am a passionate and dedicated IT professional seeking an opportunity to grow and 
+        contribute within a forward-thinking organization. With a strong foundation in technology, problem-solving, and innovation, I am eager
+         to apply my skills in  software development,   data analysis, to deliver efficient and high-quality solutions. I am committed to continuous learning, teamwork, and adapting to new challenges in the ever-evolving IT industry. 
+         My goal is to become a valuable part of a company that values creativity, performance, and technological advancement.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+  <section id="skills" class="skills-section">
+  <h2>My Skills</h2>
+  <div class="skills-buttons">
+    <button class="skill-btn" data-skill="html">HTML</button>
+    <button class="skill-btn" data-skill="css">CSS</button>
+    <button class="skill-btn" data-skill="javascript">javascript</button>
+  </div>
+
+  <!-- Modal for showing skill details -->
+  <div id="skillModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3 id="skillTitle"></h3>
+      <div id="skillCertificates"></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="projects-section">
+  <h2>My Projects</h2>
+
+  <div class="project-buttons">
+    <button class="project-btn" data-project="portfolio">Portfolio Website</button>
+    <button class="project-btn" data-project="todoapp">NLP Project</button>
+    <button class="project-btn" data-project="weatherapp">Weather App</button>
+  </div>
+
+  <!-- Modal for showing project details -->
+  <div id="projectModal" class="modal">
+    <div class="modal-content">
+      <span class="close project-close">&times;</span>
+      <h3 id="projectTitle"></h3>
+      <div id="projectDetails"></div>
+      <a id="linkedinButton" class="linkedin-btn" target="_blank">View on LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+
+<section id="contact" class="contact-section">
+  <h2>Contact Me</h2>
+  <p>Let’s connect! Reach out to me through any of these platforms:</p>
+
+  <div class="contact-buttons">
+    <a href="https://www.linkedin.com/in/your-linkedin-profile/" target="_blank" class="contact-btn">LinkedIn</a>
+    <a href="https://github.com/your-github-username" target="_blank" class="contact-btn">GitHub</a>
+    <a href="mailto:your-email@example.com" class="contact-btn">Email Me</a>
+  </div>
+</section>
+
+
+  <!-- Skill Modal -->
+  <div id="skillModal" class="modal">
+    <div class="modal-content">
+      <h3 id="skillTitle"></h3>
+      <p id="skillDetails"></p>
+      <button onclick="closeModal('skillModal')">Close</button>
+    </div>
+  </div>
+
+  <!-- Project Modal -->
+  <div id="projectModal" class="modal">
+    <div class="modal-content">
+      <img id="projectImg" src="" alt="Project Image" />
+      <h3 id="projectTitle"></h3>
+      <p id="projectDesc"></p>
+      <button id="githubBtn">GitHub</button>
+      <button onclick="closeModal('projectModal')">Close</button>
+    </div>
+  </div>
+   <script>
+    // Skill details
+const skills = {
+  JavaScript: "Certified in Advanced JavaScript. Completed multiple web app projects.",
+  React: "Built several React SPAs with animations and API integrations.",
+  Python: "Certified Python developer with machine learning experience.",
+};
+
+// Project details
+const projects = {
+  "Portfolio Website": {
+    img: "https://via.placeholder.com/400x250",
+    desc: "Personal portfolio showcasing my projects.",
+    github: "https://github.com/",
+  },
+  "Weather App": {
+    img: "https://via.placeholder.com/400x250",
+    desc: "Weather forecasting app using OpenWeather API.",
+    github: "https://github.com/",
+  },
+};
+
+// Open Skill Modal
+function openSkill(skillName) {
+  document.getElementById("skillTitle").innerText = skillName;
+  document.getElementById("skillDetails").innerText = skills[skillName];
+  document.getElementById("skillModal").style.display = "flex";
+}
+
+// Open Project Modal
+function openProject(projectName) {
+  const proj = projects[projectName];
+  document.getElementById("projectTitle").innerText = projectName;
+  document.getElementById("projectDesc").innerText = proj.desc;
+  document.getElementById("projectImg").src = proj.img;
+  document.getElementById("githubBtn").onclick = () =>
+    window.open(proj.github, "_blank");
+  document.getElementById("projectModal").style.display = "flex";
+}
+
+// Close Modal
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+
+// Close modal on click outside
+window.onclick = function (e) {
+  document.querySelectorAll(".modal").forEach((modal) => {
+    if (e.target === modal) modal.style.display = "none";
+  });
+};
+// ===== Floating Multicolor Bubbles Background =====
+const background = document.getElementById("background");
+
+// Number of bubbles (increase for more density)
+const bubbleCount = 25;
+
+const colors = [
+  "rgba(255, 0, 127, 0.6)",   // pink
+  "rgba(106, 13, 173, 0.6)",  // purple
+  "rgba(0, 204, 255, 0.6)",   // cyan
+  "rgba(255, 255, 0, 0.5)",   // yellow
+  "rgba(0, 255, 127, 0.5)",   // green
+];
+
+for (let i = 0; i < bubbleCount; i++) {
+  const bubble = document.createElement("div");
+  bubble.classList.add("bubble");
+
+  const size = Math.random() * 80 + 40; // 40–120px
+  bubble.style.width = `${size}px`;
+  bubble.style.height = `${size}px`;
+
+  // random starting horizontal position
+  bubble.style.left = `${Math.random() * 100}%`;
+
+  // random color and glow
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  bubble.style.background = color;
+  bubble.style.boxShadow = `0 0 20px ${color}`;
+
+  // random animation delay and speed
+  const duration = Math.random() * 10 + 10; // 10–20s
+  const delay = Math.random() * 10;         // 0–10s
+  bubble.style.animationDuration = `${duration}s`;
+  bubble.style.animationDelay = `${delay}s`;
+
+  background.appendChild(bubble);
+  const bubbleCount = 40;
+}
+
+// ===== SKILL MODAL FUNCTIONALITY WITH CERTIFICATE IMAGES =====
+
+// Certificate images for each skill
+const skillCertificates = {
+  html: [
+    "image.png",
+    "certificates/html-cert2.jpg"
+  ],
+  css: [
+    "image.png"
+  ],
+  javascript: [
+    "certificates/js-cert1.jpg",
+    "certificates/js-cert2.jpg",
+    "certificates/js-cert3.jpg"
+  ]
+};
+
+// Get modal elements
+const skillModal = document.getElementById("skillModal");
+const skillTitle = document.getElementById("skillTitle");
+const skillCertificatesContainer = document.getElementById("skillCertificates");
+const closeBtn = document.querySelector(".close");
+
+// Open modal when skill button is clicked
+document.querySelectorAll(".skill-btn").forEach((button) => {
+  button.addEventListener("click", () => {
+    const skill = button.getAttribute("data-skill");
+    skillTitle.textContent = skill.toUpperCase();
+
+    // Clear previous images
+    skillCertificatesContainer.innerHTML = "";
+
+    // Load new certificate images for that skill
+    if (skillCertificates[skill]) {
+      skillCertificates[skill].forEach((imgSrc) => {
+        const img = document.createElement("img");
+        img.src = imgSrc;
+        img.alt = `${skill} certificate`;
+        img.classList.add("certificate-img");
+        skillCertificatesContainer.appendChild(img);
+      });
+    } else {
+      skillCertificatesContainer.textContent = "No certificates uploaded yet.";
+    }
+
+    skillModal.style.display = "block";
+  });
+});
+
+// Close modal when clicking 'x'
+closeBtn.addEventListener("click", () => {
+  skillModal.style.display = "none";
+});
+
+// Close modal when clicking outside
+window.addEventListener("click", (event) => {
+  if (event.target === skillModal) {
+    skillModal.style.display = "none";
+  }
+});
+
+// ===== PROJECT MODAL FUNCTIONALITY =====
+
+// Replace these with your actual LinkedIn project post URLs
+const projectData = {
+  portfolio: {
+    title: "Portfolio Website",
+    description: "A personal portfolio website showcasing my work, skills, and background with animations.",
+    images: ["projects/portfolio1.jpg", "projects/portfolio2.jpg"],
+    linkedin: "https://www.linkedin.com/in/your-linkedin-profile/"
+  },
+  todoapp: {
+    title: "To-Do App",
+    description: "A simple and beautiful to-do list app built using HTML, CSS, and JavaScript for task tracking.",
+    images: ["projects/todo1.jpg"],
+    linkedin: "https://www.linkedin.com/in/your-linkedin-profile/"
+  },
+  weatherapp: {
+    title: "Weather App",
+    description: "A responsive weather forecasting web app using OpenWeather API with real-time updates.",
+    images: ["projects/weather1.jpg", "projects/weather2.jpg"],
+    linkedin: "https://www.linkedin.com/in/your-linkedin-profile/"
+  }
+};
+
+const projectModal = document.getElementById("projectModal");
+const projectTitle = document.getElementById("projectTitle");
+const projectDetails = document.getElementById("projectDetails");
+const linkedinButton = document.getElementById("linkedinButton");
+const projectClose = document.querySelector(".project-close");
+
+// Open modal when project button clicked
+document.querySelectorAll(".project-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const projectKey = btn.getAttribute("data-project");
+    const project = projectData[projectKey];
+
+    if (project) {
+      projectTitle.textContent = project.title;
+
+      projectDetails.innerHTML = `
+        <p>${project.description}</p>
+        ${project.images
+          .map(img => `<img src="${img}" alt="${project.title}" class="project-img">`)
+          .join("")}
+      `;
+
+      linkedinButton.href = project.linkedin;
+
+      projectModal.style.display = "block";
+    }
+  });
+});
+
+// Close modal
+projectClose.addEventListener("click", () => {
+  projectModal.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+  if (event.target === projectModal) {
+    projectModal.style.display = "none";
+  }
+});
+
+
+   </script>
+  <script src="script.js"></script>
+</body>
+</html>
